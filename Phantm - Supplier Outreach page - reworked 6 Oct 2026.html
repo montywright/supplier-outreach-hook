@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Supplier Outreach by Phantm</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+[hidden]{display:none!important}
+img{max-width:100%}
+/* Layout: one column of full-width bands. The rollout is a matrix: rows are phases, columns are who does the work. */
+:root{
+  --forest:#1d2a24; --forest-2:#24362e; --moss:#2f4a3e; --moss-2:#3a5a4b;
+  --mint:#6cc49e; --mint-soft:#bfe6d3; --mint-tint:#d6efe3; --mint-ink:#1f5a40;
+  --paper:#f4f6f5; --card:#e8ecea; --line:#d5dbd8; --dash:#aab6b0;
+  --ink:#18211d; --muted:#5a6761; --amber:#c9a24a;
+  --r-lg:22px; --r-md:14px; --r-sm:9px;
+  --font:"Outfit","Avenir Next","Segoe UI",system-ui,sans-serif;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+}
+*,*::before,*::after{box-sizing:inherit}
+html{scroll-behavior:smooth; scroll-padding-top:calc(72px + env(safe-area-inset-top,0px))}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important;animation:none!important}}
+body{margin:0;font-family:var(--font);color:var(--ink);background:var(--paper);font-size:17px;line-height:1.55;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--mint);outline-offset:2px;border-radius:6px}
+.wrap{max-width:1180px;margin:0 auto;padding:0 28px}
+.eyebrow{font-size:12.5px;letter-spacing:.16em;text-transform:uppercase;font-weight:500;color:var(--muted);margin:0 0 14px}
+.dark .eyebrow{color:var(--mint)}
+h1,h2,h3,h4{margin:0;font-weight:600;letter-spacing:-.015em;line-height:1.1}
+h2{font-size:clamp(28px,3.4vw,40px);max-width:22ch;text-wrap:balance}
+h3{font-size:20px}
+p{margin:0}
+.lede{color:var(--muted);max-width:62ch;margin-top:14px}
+.dark .lede{color:#c6d2cc}
+section{padding:96px 0}
+
+/* nav */
+.nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:rgba(29,42,36,.96);backdrop-filter:blur(8px);color:#fff}
+.nav .wrap{display:flex;align-items:center;gap:28px;height:64px}
+.logo{font-weight:700;font-size:24px;letter-spacing:-.02em;text-decoration:none}
+.crumbs{font-size:14px;color:#b9c7c0;display:flex;gap:8px;align-items:center}
+.crumbs b{color:#fff;font-weight:500}
+.nav .spacer{flex:1}
+.btn{display:inline-flex;align-items:center;gap:10px;border:0;border-radius:999px;padding:13px 22px;font:500 15.5px/1 var(--font);cursor:pointer;text-decoration:none}
+.btn-mint{background:var(--mint);color:var(--forest)}
+.btn-mint:hover{background:#80d0ad}
+.btn-ghost{background:transparent;color:#fff;border:1px solid #4d6a5c}
+.btn-ghost:hover{border-color:var(--mint)}
+.btn-dark{background:var(--forest);color:#fff}
+.btn-dark:hover{background:var(--moss)}
+.btn svg{width:16px;height:16px}
+
+/* hero */
+.hero{background:radial-gradient(120% 90% at 85% 0%,#2b4337 0%,var(--forest) 55%);color:#fff;padding:84px 0 92px;overflow:hidden}
+.hero h1{margin-bottom:22px;font-size:clamp(40px,6vw,76px);max-width:13ch;letter-spacing:-.03em}
+.hero .lede{font-size:19px;max-width:54ch}
+.hero-ctas{display:flex;gap:14px;flex-wrap:wrap;margin-top:32px}
+.flow{margin-top:64px;display:grid;grid-template-columns:minmax(150px,1fr) 56px minmax(280px,1.5fr) 56px minmax(190px,1.1fr);align-items:center}
+.col-label{font-size:12.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--mint);margin-bottom:12px}
+.chips{display:grid;gap:10px}
+.chip{background:var(--moss);border-radius:var(--r-sm);padding:13px 16px;font-weight:500;display:flex;gap:10px;align-items:center}
+.chip i{width:9px;height:9px;border-radius:50%;background:var(--mint);opacity:.7}
+.pipe{height:2px;background:var(--mint);position:relative;margin:0 6px}
+.pipe::after{content:"";position:absolute;right:-2px;top:-5px;border-left:9px solid var(--mint);border-top:6px solid transparent;border-bottom:6px solid transparent}
+.engine{background:#eef1ef;color:var(--ink);border-radius:var(--r-lg);padding:20px}
+.engine .col-label{color:var(--muted)}
+.tiles{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.tile{background:#e1e6e3;border-radius:var(--r-md);padding:14px 14px 16px;font-weight:600;font-size:15.5px}
+.tile svg{display:block;width:20px;height:20px;margin-bottom:10px;stroke:var(--ink)}
+.engine-foot{display:flex;gap:10px;align-items:center;margin-top:12px;background:var(--forest);color:#fff;border-radius:var(--r-md);padding:12px 14px;font-size:14.5px;font-weight:500;line-height:1.3}
+.engine-foot svg{flex:none;width:20px;height:20px;stroke:var(--mint)}
+.outs{display:grid;gap:12px}
+.out{border-radius:var(--r-md);padding:16px 18px;background:var(--moss)}
+.out.dashed{background:transparent;border:1.5px dashed var(--mint)}
+.out b{display:block;font-weight:600}
+.out span{font-size:14px;color:#c6d2cc}
+.tagline{margin-top:28px;color:var(--mint);font-weight:500}
+.tagline u{text-decoration-thickness:1px;text-underline-offset:4px}
+
+/* results: where programs stall */
+.results{background:#fff}
+#flags{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:40px}
+.flag{border:1px solid var(--line);border-radius:var(--r-md);padding:20px 22px;background:var(--paper);min-width:0}
+.flag:last-child:nth-child(odd){grid-column:1/-1}
+.flag-top{display:flex;justify-content:space-between;gap:12px;align-items:flex-start}
+.flag h3{font-size:18px}
+.pill{flex:none;font-size:12.5px;font-weight:500;border-radius:999px;padding:5px 11px;white-space:nowrap}
+.pill.in{background:var(--mint-tint);color:var(--mint-ink)}
+.pill.setup{background:var(--forest);color:#fff}
+.pill.soon{background:#f3e9cf;color:#6e5418}
+.flag p{font-size:15.5px;color:var(--muted);margin-top:8px}
+.flag p strong{color:var(--ink);font-weight:500}
+.empty-note{grid-column:1/-1;font-size:15px;color:var(--muted);padding:6px 0 0}
+
+/* rollout: rows are phases, columns are who does the work */
+.rollout{background:var(--paper)}
+.rollout h2{max-width:24ch}
+.roll-card{background:#fff;border:1px solid var(--line);border-radius:var(--r-lg);padding:30px 30px 24px;margin-top:40px}
+.roll-top{display:flex;justify-content:space-between;align-items:baseline;gap:6px 24px;flex-wrap:wrap;margin-bottom:24px}
+.roll-top h3{font-size:22px}
+.roll-top p{font-size:15px;color:var(--muted)}
+.roll-top a{color:var(--moss);font-weight:500}
+.phases{display:grid;grid-template-columns:minmax(190px,.85fr) repeat(3,minmax(0,1fr));column-gap:10px;row-gap:3px}
+.lane-head{display:flex;align-items:center;gap:8px;padding:0 16px 10px;font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;font-weight:500;color:var(--muted)}
+.lane-head i{flex:none;width:10px;height:10px;border-radius:3px}
+.lane-head.p i{background:var(--forest)}
+.lane-head.t i{background:var(--mint)}
+.lane-head.y i{background:var(--card);border:1px solid var(--dash)}
+.phase{grid-column:1/-1;display:grid;grid-template-columns:subgrid}
+.phase.next{margin-top:12px}
+.ph-head{position:relative;padding:13px 14px 13px 40px;min-width:0}
+.ph-head::before{content:"";position:absolute;z-index:1;left:0;top:16px;width:16px;height:16px;border-radius:50%;background:#fff;border:3px solid var(--moss)}
+.ph-head::after{content:"";position:absolute;left:7px;top:-3px;bottom:0;width:2px;background:var(--line)}
+.phase.key .ph-head::before{background:var(--mint);border-color:var(--forest)}
+.phase.first .ph-head::after{top:24px}
+.phase.next .ph-head::before{border-style:dashed;border-width:2px}
+.phase.next .ph-head::after{top:-15px;bottom:auto;height:39px;background:repeating-linear-gradient(var(--line) 0 4px,transparent 4px 8px)}
+.ph-head .when{font-size:13.5px;color:var(--muted);font-weight:500}
+.ph-head h4{font-size:17.5px;line-height:1.2;margin-top:2px}
+.cell{padding:13px 16px;font-size:15px;line-height:1.4;min-width:0}
+.cell .who{display:none}
+.cell.p-lead{background:var(--forest);color:#fff}
+.cell.p-support{background:var(--card);color:var(--ink)}
+.cell.p-standby{border:1.5px dashed var(--dash);color:var(--muted)}
+.cell.t-support{background:var(--mint-tint);color:var(--mint-ink)}
+.cell.t-lead{background:var(--mint);color:var(--forest)}
+.cell.you{background:var(--paper);color:var(--muted)}
+.phase.rt .cell{border-top-left-radius:var(--r-sm);border-top-right-radius:var(--r-sm)}
+.phase.rb .cell{border-bottom-left-radius:var(--r-sm);border-bottom-right-radius:var(--r-sm)}
+.handover{grid-column:1/-1;position:relative;display:flex;align-items:center;gap:10px;padding:11px 0 11px 40px;font-size:14px;font-weight:500;color:var(--moss)}
+.handover::before{content:"";position:absolute;left:7px;top:-3px;bottom:0;width:2px;background:var(--line)}
+.handover::after{content:"";flex:1;height:1px;background:var(--line)}
+.handover svg{flex:none;width:18px;height:18px;stroke:var(--moss)}
+.roll-legend{display:flex;flex-wrap:wrap;gap:8px 22px;margin-top:22px;padding-top:18px;border-top:1px solid var(--line);font-size:13.5px;color:var(--muted)}
+.roll-legend span{display:inline-flex;align-items:center;gap:8px}
+.roll-legend i{flex:none;width:22px;height:12px;border-radius:3px}
+.roll-legend .solid{background:var(--muted)}
+.roll-legend .tint{background:var(--card)}
+.roll-legend .dash{border:1.5px dashed var(--dash)}
+.roll-note{margin-top:26px;max-width:62ch;color:var(--muted)}
+.roll-note strong{color:var(--ink);font-weight:500}
+
+/* planner (scope) */
+.planner{background:var(--paper);padding-top:24px}
+.plan-grid{display:grid;grid-template-columns:1.2fr 1fr;gap:40px;margin-top:40px;align-items:start}
+.qs{background:#fff;border:1px solid var(--line);border-radius:var(--r-lg);padding:8px 30px}
+.q{padding:24px 0}
+.q+.q{border-top:1px solid var(--line)}
+.q h3{display:flex;align-items:center;gap:12px;margin-bottom:16px}
+.step-num{flex:none;width:28px;height:28px;border-radius:50%;background:var(--forest);color:#fff;display:grid;place-items:center;font-weight:600;font-size:14px}
+.opts{display:flex;flex-wrap:wrap;gap:8px}
+.opt{position:relative}
+.opt input{position:absolute;opacity:0;inset:0;cursor:pointer;margin:0}
+.opt span{display:inline-block;padding:10px 17px;border-radius:999px;border:1px solid var(--line);background:var(--paper);font-size:15.5px;cursor:pointer;user-select:none}
+.opt input:checked+span{background:var(--forest);border-color:var(--forest);color:#fff}
+.opt input:focus-visible+span{outline:3px solid var(--mint);outline-offset:2px}
+.opt:hover span{border-color:var(--moss-2)}
+.cross{font-size:14.5px;color:var(--muted);margin-top:12px}
+.cross a{color:var(--moss);font-weight:500}
+.summary{position:sticky;top:calc(88px + env(safe-area-inset-top,0px));background:var(--forest);color:#fff;border-radius:var(--r-lg);padding:28px}
+.summary h3{font-size:22px}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:20px 0 8px}
+.stat{background:var(--forest-2);border-radius:var(--r-md);padding:16px 14px}
+.stat .v{font-size:34px;font-weight:600;letter-spacing:-.02em;line-height:1;color:var(--mint)}
+.stat .k{font-size:13.5px;color:#c6d2cc;margin-top:8px;line-height:1.35}
+.assume{margin-top:20px;font-size:13.5px;color:#b9c7c0}
+.assume summary{cursor:pointer;color:#fff;font-weight:500;padding:4px 0}
+.assume p{margin-top:8px}
+
+/* what it does */
+.does{background:var(--paper)}
+.caps{display:grid;grid-template-columns:repeat(4,1fr);gap:40px;margin-top:44px;align-items:stretch}
+.cap{background:var(--card);border-radius:var(--r-lg);padding:26px 22px;position:relative}
+.cap+.cap::before{content:"";position:absolute;left:-30px;top:50%;width:20px;height:2px;background:var(--mint)}
+.cap+.cap::after{content:"";position:absolute;left:-14px;top:calc(50% - 5px);border-left:8px solid var(--mint);border-top:6px solid transparent;border-bottom:6px solid transparent}
+.cap.hl{background:var(--forest);color:#fff}
+.cap svg{width:22px;height:22px;stroke:currentColor;margin-bottom:16px}
+.cap p{font-size:15.5px;color:var(--muted);margin-top:8px}
+.cap.hl p{color:#c6d2cc}
+
+/* supplier view */
+.sees{background:#fff}
+.sees-grid{display:grid;grid-template-columns:1fr 1.25fr;gap:56px;align-items:center}
+.quote{font-size:clamp(24px,2.6vw,32px);font-weight:600;line-height:1.25;letter-spacing:-.015em;margin-top:6px}
+.sees ul{margin:26px 0 0;padding:0;list-style:none;display:grid;gap:14px}
+.sees li{display:flex;gap:12px;color:var(--muted)}
+.sees li svg{flex:none;width:20px;height:20px;stroke:var(--moss);margin-top:3px}
+.device{background:var(--forest);border-radius:20px;padding:12px;box-shadow:0 30px 60px -30px rgba(29,42,36,.55)}
+.screen{background:#f3f5f4;border-radius:12px;display:grid;grid-template-columns:150px 1fr;min-height:360px;overflow:hidden;font-size:13px}
+.side{background:var(--forest);color:#d6e0db;padding:16px 12px;display:grid;align-content:start;gap:6px}
+.side .brand{font-weight:700;color:#fff;font-size:16px;margin-bottom:12px}
+.side span{padding:7px 9px;border-radius:7px}
+.side span.on{background:var(--moss)}
+.main{padding:18px 20px}
+.main .welcome{font-size:18px;font-weight:600}
+.main .acct{color:var(--muted);margin-top:2px}
+.msg{background:#fff;border:1px solid var(--line);border-radius:10px;padding:14px;margin-top:14px}
+.msg b{display:block;margin-bottom:4px}
+.mini-grid{display:grid;grid-template-columns:1.3fr 1fr;gap:12px;margin-top:12px}
+.journey{background:#fff;border:1px solid var(--line);border-radius:10px;padding:14px}
+.journey ol{margin:8px 0 0;padding-left:18px;color:var(--muted)}
+.journey li{margin-bottom:5px}
+.journey li.done{color:var(--ink);text-decoration:line-through;text-decoration-color:var(--mint)}
+.ready{background:#fff;border:1px solid var(--line);border-radius:10px;padding:14px;display:grid;align-content:space-between;gap:10px}
+.ready .n{font-size:30px;font-weight:600}
+.prog{height:6px;background:var(--card);border-radius:4px;overflow:hidden}
+.prog i{display:block;height:100%;width:38%;background:var(--mint)}
+.mini-btn{background:var(--forest);color:#fff;border-radius:999px;padding:7px 12px;text-align:center;font-weight:500}
+
+/* plugs into */
+.plugs{background:var(--forest);color:#fff}
+.plug-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:40px}
+.plug{border-radius:var(--r-lg);padding:26px;background:var(--forest-2)}
+.plug.dashed{background:transparent;border:1.5px dashed var(--mint)}
+.plug p{color:#c6d2cc;font-size:15.5px;margin-top:8px}
+.proof{margin-top:56px;display:grid;grid-template-columns:auto 1fr;gap:32px;align-items:center;border-top:1px solid #39503f;padding-top:40px}
+.proof .big{font-size:clamp(56px,8vw,96px);font-weight:600;letter-spacing:-.04em;line-height:.9;color:var(--mint)}
+.proof p{color:#c6d2cc;max-width:56ch}
+.proof p b{color:#fff;font-weight:500}
+
+/* report */
+.report{background:var(--paper)}
+.report-card{background:#fff;border:1px solid var(--line);border-radius:var(--r-lg);padding:40px;display:grid;grid-template-columns:1fr 1fr;gap:48px}
+.report-card ul{margin:22px 0 0;padding-left:20px;color:var(--muted)}
+.report-card li{margin-bottom:8px}
+.inputs{display:grid;gap:14px;align-content:start}
+.inputs label{font-weight:500;font-size:15px;display:grid;gap:6px}
+.inputs input[type=email],.inputs input[type=text]{font:16px var(--font);padding:13px 14px;border:1px solid var(--line);border-radius:var(--r-sm);background:var(--paper);color:var(--ink)}
+.inputs input:focus{outline:2px solid var(--mint);border-color:transparent}
+.consent{display:flex!important;grid-template-columns:none;gap:10px!important;align-items:flex-start;font-weight:400!important;color:var(--muted)}
+.consent input{margin-top:4px;accent-color:var(--moss)}
+.fine{font-size:13.5px;color:var(--muted)}
+.error{color:#a3432f;font-size:14px;min-height:20px}
+.thanks{background:var(--mint-tint);border-radius:var(--r-md);padding:18px;color:var(--mint-ink)}
+
+/* close */
+.close{background:var(--forest);color:#fff;padding:72px 0}
+.close .wrap{display:flex;justify-content:space-between;align-items:center;gap:32px;flex-wrap:wrap}
+.close h2{max-width:20ch}
+.close p{color:#c6d2cc;margin-top:12px;max-width:44ch}
+.close .ctas{display:flex;gap:12px;flex-wrap:wrap}
+footer{background:#16201b;color:#93a39b;font-size:13.5px;padding:28px 0}
+footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
+
+@media (max-width:1000px){
+  .flow{grid-template-columns:1fr;gap:0}
+  .pipe{width:2px;height:34px;margin:10px auto}
+  .pipe::after{right:-5px;top:auto;bottom:-2px;border-left:6px solid transparent;border-right:6px solid transparent;border-top:9px solid var(--mint);border-bottom:0}
+  .chips{grid-template-columns:repeat(4,1fr)}
+  .plan-grid,.sees-grid,.report-card{grid-template-columns:1fr}
+  .summary{position:static}
+  .caps{grid-template-columns:1fr 1fr;gap:16px}
+  .cap+.cap::before,.cap+.cap::after{display:none}
+  .plug-grid{grid-template-columns:1fr}
+}
+/* below this width the rollout matrix stacks: one block per phase, each cell labelled with who */
+@media (max-width:880px){
+  #flags{grid-template-columns:1fr}
+  .roll-card{padding:24px 20px 20px}
+  .phases{grid-template-columns:1fr;row-gap:0}
+  .lane-head{display:none}
+  .phase{position:relative;grid-template-columns:1fr;row-gap:5px;padding:0 0 26px 36px}
+  .phase.next{margin-top:0;padding-bottom:0}
+  .phase::before{content:"";position:absolute;left:7px;top:8px;bottom:-8px;width:2px;background:var(--line)}
+  .phase.next::before{display:none}
+  .ph-head{padding:0 0 5px}
+  .ph-head::before{left:-36px;top:3px}
+  .ph-head::after,.phase.next .ph-head::after{display:none}
+  .phase .cell{border-radius:var(--r-sm)}
+  .cell .who{display:block;font-size:11.5px;letter-spacing:.13em;text-transform:uppercase;font-weight:500;opacity:.78;margin-bottom:3px}
+  .handover{padding:0 0 24px 36px}
+  .handover::before{top:0;bottom:0}
+}
+@media (max-width:620px){
+  body{font-size:16px}
+  .wrap{padding:0 18px}
+  section{padding:68px 0}
+  .planner{padding-top:8px}
+  .crumbs{display:none}
+  .chips{grid-template-columns:1fr 1fr}
+  .qs{padding:4px 18px}
+  .caps{grid-template-columns:1fr}
+  .screen{grid-template-columns:1fr}
+  .side{display:none}
+  .mini-grid{grid-template-columns:1fr}
+  .proof{grid-template-columns:1fr}
+  .report-card{padding:26px 20px}
+  .stats{grid-template-columns:1fr}
+}
+</style>
+
+</head>
+<body>
+
+<header class="nav">
+  <div class="wrap">
+    <a class="logo" href="#top">phantm</a>
+    <div class="crumbs">Technology <span aria-hidden="true">/</span> <b>Supplier Outreach</b></div>
+    <div class="spacer"></div>
+    <a class="btn btn-mint" href="#plan">Plan my program</a>
+  </div>
+</header>
+
+<main id="top">
+
+<!-- HERO -->
+<section class="hero dark">
+  <div class="wrap">
+    <p class="eyebrow">Supplier Outreach by Phantm</p>
+    <h1>Get supplier data without the chase.</h1>
+    <p class="lede">Our First Mile team sets your program up with you. Then Supplier Outreach takes over the chase, capturing packaging data from every supplier into one record. See where programs stall, then size yours in three clicks.</p>
+    <div class="hero-ctas">
+      <a class="btn btn-mint" href="#plan">Size my supplier program</a>
+      <a class="btn btn-ghost" href="#sees">See what suppliers see</a>
+    </div>
+
+    <div class="flow" aria-label="How Supplier Outreach works">
+      <div>
+        <div class="col-label">Your suppliers</div>
+        <div class="chips">
+          <div class="chip"><i></i>Supplier A</div>
+          <div class="chip"><i></i>Supplier B</div>
+          <div class="chip"><i></i>Supplier C</div>
+          <div class="chip"><i></i>Supplier D</div>
+        </div>
+      </div>
+      <div class="pipe" aria-hidden="true"></div>
+      <div class="engine">
+        <div class="col-label">Supplier Outreach</div>
+        <div class="tiles">
+          <div class="tile"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="m8 12 3 3 5-6"/></svg>Data capture</div>
+          <div class="tile"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><rect x="3" y="4" width="18" height="16" rx="3"/><path d="m7 15 3-3 3 2 4-5"/></svg>Tracked changes</div>
+          <div class="tile"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><ellipse cx="12" cy="6" rx="7" ry="3"/><path d="M5 6v12c0 1.7 3.1 3 7 3s7-1.3 7-3V6M5 12c0 1.7 3.1 3 7 3s7-1.3 7-3"/></svg>Consolidated</div>
+          <div class="tile"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><path d="M13 3 5 14h6l-1 7 8-11h-6z"/></svg>Automated</div>
+        </div>
+        <div class="engine-foot"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><circle cx="9" cy="8" r="3.2"/><path d="M3 20c0-3.3 2.7-5.5 6-5.5s6 2.2 6 5.5"/><circle cx="17" cy="9" r="2.4"/><path d="M16.5 14.6c2.6.2 4.5 2 4.5 4.6"/></svg>Set up with you by our First Mile team</div>
+      </div>
+      <div class="pipe" aria-hidden="true"></div>
+      <div>
+        <div class="col-label">Plugs into</div>
+        <div class="outs">
+          <div class="out"><b>Phantm platform</b><span>Analytics, reporting and more.</span></div>
+          <div class="out dashed"><b>Your own system</b><span>The tools you already run.</span></div>
+        </div>
+      </div>
+    </div>
+    <p class="tagline"><u>Capture once, repurpose forever.</u></p>
+  </div>
+</section>
+
+<!-- YOUR RESULTS: WHERE PROGRAMS STALL -->
+<section class="results" id="results">
+  <div class="wrap">
+    <p class="eyebrow">Your results</p>
+    <h2>Where programs like yours stall, and what we do about it</h2>
+    <p class="lede">These come from supplier programs we have run for Australian retailers. Each one shows whether the technology covers it today, our First Mile team handles it at set-up, or it is on the roadmap.</p>
+    <div id="flags"></div>
+  </div>
+</section>
+
+<!-- YOUR ROLLOUT: PEOPLE SET UP, TECHNOLOGY TAKES OVER -->
+<section class="rollout" id="rollout">
+  <div class="wrap">
+    <p class="eyebrow">Your rollout</p>
+    <h2>Our people set it up with you. Then the technology takes over.</h2>
+    <p class="lede">We don't hand you an empty platform. Phantm's First Mile team builds your supplier program with you, then Supplier Outreach runs it and keeps the record current.</p>
+
+    <div class="roll-card">
+      <div class="roll-top">
+        <h3>Who does what, week by week</h3>
+        <p><span id="rollMeta"></span> <a href="#plan">Change the numbers</a></p>
+      </div>
+      <div class="phases" id="phases" aria-label="Your rollout by phase, showing what the First Mile team, the technology and your team each do"></div>
+      <div class="roll-legend" aria-hidden="true">
+        <span><i class="solid"></i>Solid: leads the phase</span>
+        <span><i class="tint"></i>Tint: supports</span>
+        <span><i class="dash"></i>Dashed: on call</span>
+      </div>
+    </div>
+    <p class="roll-note"><strong>The people share falls as your data improves.</strong> What our team learns on each program is built back into Supplier Outreach, so the technology carries more of the next one.</p>
+  </div>
+</section>
+
+<!-- PLAN YOUR PROGRAM: THE SCOPE -->
+<section class="planner" id="plan">
+  <div class="wrap">
+    <p class="eyebrow">Plan your program</p>
+    <h2>Size your supplier program in three clicks</h2>
+    <p class="lede">No files, no login and no email needed.</p>
+
+    <div class="plan-grid">
+      <div class="qs">
+        <div class="q">
+          <h3><span class="step-num">1</span>How many suppliers?</h3>
+          <div class="opts" role="radiogroup" aria-label="How many suppliers">
+            <label class="opt"><input type="radio" name="sup" id="sup12" value="12"><span>Under 20</span></label>
+            <label class="opt"><input type="radio" name="sup" id="sup40" value="40" checked><span>20 to 60</span></label>
+            <label class="opt"><input type="radio" name="sup" id="sup100" value="100"><span>60 to 150</span></label>
+            <label class="opt"><input type="radio" name="sup" id="sup200" value="200"><span>Over 150</span></label>
+          </div>
+        </div>
+        <div class="q">
+          <h3><span class="step-num">2</span>What do you need from them?</h3>
+          <div class="opts" role="group" aria-label="What you need" id="needs">
+            <label class="opt"><input type="checkbox" id="needMaterials" value="materials" checked><span>Materials</span></label>
+            <label class="opt"><input type="checkbox" id="needPackaging" value="packaging" checked><span>Packaging</span></label>
+            <label class="opt"><input type="checkbox" id="needEvidence" value="evidence"><span>Evidence</span></label>
+          </div>
+          <p class="cross">Not sure? <a href="#">Check your obligations first</a>.</p>
+        </div>
+        <div class="q">
+          <h3><span class="step-num">3</span>How do you collect it today?</h3>
+          <div class="opts" role="radiogroup" aria-label="How you collect it today">
+            <label class="opt"><input type="radio" name="method" id="methodEmail" value="email" checked><span>Email and spreadsheets</span></label>
+            <label class="opt"><input type="radio" name="method" id="methodPortal" value="portal"><span>A portal or forms</span></label>
+            <label class="opt"><input type="radio" name="method" id="methodNone" value="none"><span>Not started</span></label>
+          </div>
+        </div>
+      </div>
+
+      <aside class="summary" aria-live="polite">
+        <h3>Your program</h3>
+        <div class="stats">
+          <div class="stat"><div class="v" id="sWeeks">10</div><div class="k">weeks to one complete record</div></div>
+          <div class="stat"><div class="v" id="sChase">0</div><div class="k">chasing emails you stop sending</div></div>
+          <div class="stat"><div class="v" id="sHours">0</div><div class="k">team hours saved</div></div>
+        </div>
+        <details class="assume">
+          <summary>How we estimate this</summary>
+          <p>Each supplier gets an invite and four follow-ups by hand (three with a portal). A manual program takes about 2.5 hours per supplier plus 45 minutes per type of data to consolidate. Supplier Outreach takes about 40 minutes per supplier. Indicative only.</p>
+        </details>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<!-- WHAT IT DOES -->
+<section class="does">
+  <div class="wrap">
+    <p class="eyebrow">What it does</p>
+    <h2>Captured, tracked, consolidated and automated</h2>
+    <p class="lede">The technology handles the volume. Our First Mile team handles the judgement calls.</p>
+    <div class="caps">
+      <div class="cap"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="m8 12 3 3 5-6"/></svg><h3>Data capture</h3><p>Suppliers review what is pre-loaded, confirm it and attach evidence.</p></div>
+      <div class="cap"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><rect x="3" y="4" width="18" height="16" rx="3"/><path d="m7 15 3-3 3 2 4-5"/></svg><h3>Tracked changes</h3><p>Every change stays on the record, so you can see what moved.</p></div>
+      <div class="cap"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><ellipse cx="12" cy="6" rx="7" ry="3"/><path d="M5 6v12c0 1.7 3.1 3 7 3s7-1.3 7-3V6M5 12c0 1.7 3.1 3 7 3s7-1.3 7-3"/></svg><h3>Consolidated</h3><p>Every supplier's answers land in one record per product.</p></div>
+      <div class="cap hl"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><path d="M13 3 5 14h6l-1 7 8-11h-6z"/></svg><h3>Automated</h3><p>Requests and reminders go out for you.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- WHAT YOUR SUPPLIER SEES -->
+<section class="sees" id="sees">
+  <div class="wrap sees-grid">
+    <div>
+      <p class="eyebrow">What your supplier sees</p>
+      <p class="quote">"We've already prepared the data. You just need to review what's missing."</p>
+      <ul>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="m5 12 4 4 10-10"/></svg><span>One invite with a link straight to their products, and no software to install.</span></li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="m5 12 4 4 10-10"/></svg><span>Their products already listed, so the job is to check and fill gaps.</span></li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="m5 12 4 4 10-10"/></svg><span>A clear view of what is left for each product.</span></li>
+      </ul>
+    </div>
+    <div class="device" role="img" aria-label="Preview of the supplier welcome screen in Supplier Outreach">
+      <div class="screen">
+        <div class="side"><div class="brand">phantm</div><span class="on">Home</span><span>Products</span><span>Packaging</span><span>Evidence</span><span>Support</span></div>
+        <div class="main">
+          <div class="welcome">Welcome to Phantm</div>
+          <div class="acct">Your customer's supplier program</div>
+          <div class="msg"><b>Your customer has invited you to confirm packaging data</b>We've already prepared the data. You just need to review what's missing.</div>
+          <div class="mini-grid">
+            <div class="journey"><b>Your validation journey</b>
+              <ol><li class="done">Review your details</li><li>Confirm products</li><li>Check packaging layers</li><li>Attach evidence and submit</li></ol>
+            </div>
+            <div class="ready"><b>Ready to start?</b><div><div class="n">16</div><div style="color:var(--muted)">products to review</div></div><div class="prog"><i></i></div><div class="mini-btn">Start reviewing</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PLUGS INTO + PROOF -->
+<section class="plugs dark">
+  <div class="wrap">
+    <p class="eyebrow">Runs on its own</p>
+    <h2>Use it with Phantm, or on its own</h2>
+    <p class="lede">Supplier Outreach is a standalone product. The record it builds goes wherever your team already works.</p>
+    <div class="plug-grid">
+      <div class="plug"><h3>Phantm platform</h3><p>Analytics, regulatory reporting and year on year tracking on top of the same record.</p></div>
+      <div class="plug dashed"><h3>Your own system</h3><p>Export the consolidated record into the ERP, PLM or reporting tools you already run.</p></div>
+      <div class="plug"><h3>Next year's program</h3><p>Last year's confirmed data becomes this year's pre-load, so suppliers only review what changed.</p></div>
+    </div>
+    <div class="proof">
+      <div class="big">77%</div>
+      <p><b>Supplier engagement in each of our two 2026 retail programs.</b> Two Australian retailers, run independently, reached the same engagement rate across their supplier bases with Supplier Outreach.</p>
+    </div>
+  </div>
+</section>
+
+<!-- REPORT -->
+<section class="report" id="report">
+  <div class="wrap">
+    <div class="report-card">
+      <div>
+        <p class="eyebrow">Get your full plan</p>
+        <h2>Take your program plan to your team</h2>
+        <ul>
+          <li>Your rollout week by week, sized to your supplier base, with who does what at each stage</li>
+          <li>The data checklist for the layers you picked</li>
+          <li>An invitation email you can adapt for your suppliers</li>
+          <li>A short list of what to pre-load before the first invite</li>
+        </ul>
+      </div>
+      <div class="inputs" id="capture">
+        <label>Work email<input type="email" id="email" autocomplete="email" placeholder="name@company.com.au"></label>
+        <label>Company<input type="text" id="company" autocomplete="organization"></label>
+        <label class="consent"><input type="checkbox" id="consent"><span>Send me product updates from Phantm. You can unsubscribe at any time.</span></label>
+        <div class="error" id="err" role="alert"></div>
+        <button class="btn btn-dark" id="send" type="button">Email my plan</button>
+        <p class="fine">Your answers above are attached so the plan matches your program. Estimates are indicative only.</p>
+        <div class="thanks" id="thanks" role="status" hidden>Your plan is on its way. Check your inbox in the next few minutes.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CLOSE -->
+<section class="close">
+  <div class="wrap">
+    <div>
+      <h2>Start with your top ten suppliers</h2>
+      <p>Our First Mile team sets up the first wave with you. The technology takes it from there.</p>
+    </div>
+    <div class="ctas">
+      <a class="btn btn-mint" href="#">Book a demo</a>
+      <a class="btn btn-ghost" href="#">Already have files? Try Phantm AI</a>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap"><span>Supplier Outreach by Phantm</span><span>Estimates on this page are indicative and based on the assumptions shown.</span></div>
+</footer>
+
+<script>
+(function(){
+  const $ = id => document.getElementById(id);
+  const fmt = n => Math.round(n).toLocaleString('en-AU');
+  const weeksFor = n => n<=15?6 : n<=60?10 : n<=150?12 : 16;
+
+  function flags(sup, needs, method){
+    const out = [];
+    out.push({t:'Invites that never arrive', pill:'setup', p:'Corporate email filters often flag unfamiliar senders, so some suppliers never see the request.', a:'We check delivery with your largest suppliers before the first wave, so invites land in inboxes rather than spam folders.'});
+    if(needs.includes('packaging')) out.push({t:'Products left one step short', pill:'in', p:'Suppliers tend to finish most packaging layers and stop before the last one.', a:'Every product shows its progress by layer, and reminders keep going until each one is confirmed.'});
+    if(needs.includes('evidence')) out.push({t:'Evidence scattered across inboxes', pill:'in', p:'Spec sheets and certificates arrive as attachments that are hard to match to a product.', a:'Suppliers attach evidence against the record it supports, so it stays with the data.'});
+    if(method==='none') out.push({t:'Starting from a blank page', pill:'in', p:'Suppliers respond faster when they review data than when they type it from scratch.', a:'Even a product list is enough to pre-load. Suppliers then fill in the packaging detail directly.'});
+    out.push({t:'Suppliers who work in other languages', pill:'soon', p:'Many suppliers reply in their own language, which slows every request and reminder.', a:'Supplier screens and emails in Simplified Chinese first, then Korean, Bahasa Indonesia and Bahasa Malaysia.'});
+    if(sup>20) out.push({t:'One contact per supplier', pill:'soon', p:'Leave, travel and handovers stall a supplier when only one person holds the account.', a:'Several seats per supplier organisation, with suppliers able to add or hand over contacts themselves.'});
+    return out;
+  }
+
+  function renderFlags(sup, needs, method){
+    const label = {in:'Included', setup:'Part of set-up', soon:'On the roadmap'};
+    const who = {in:'Supplier Outreach', setup:'First Mile team', soon:'Supplier Outreach'};
+    $('flags').innerHTML = needs.length
+      ? flags(sup, needs, method).map(x=>`<div class="flag"><div class="flag-top"><h3>${x.t}</h3><span class="pill ${x.pill}">${label[x.pill]}</span></div><p>${x.p}</p><p><strong>${who[x.pill]}:</strong> ${x.a}</p></div>`).join('')
+      : '<p class="empty-note">Pick at least one type of data in the planner below to see where your program is likely to stall.</p>';
+  }
+
+  // Rows are phases. pl / tl are the level each side works at: lead, support or standby.
+  function phases(sup, method, weeks, wave){
+    const pre = method==='none' ? 'Loads your product list and supplier contacts' : 'Loads what you hold and marks the gaps';
+    const rows = [
+      {w:'Week 0', h:'Set up and pre-load',
+        pl:'lead', p:pre+', then checks invites reach your largest suppliers.',
+        tl:'support', t:'Structures the pre-load into one record per product.',
+        y:'Share your product list and supplier contacts.'},
+      {w:'Weeks 1 to 2', h:'Your top '+wave+' suppliers', key:true,
+        pl:'lead', p:'Stays close to the first wave and fixes anything that slows suppliers down.',
+        tl:'support', t:'Sends the invites and shows progress product by product.',
+        y:'Put your name to the invitation.'}
+    ];
+    if(sup>wave) rows.push({w:'Weeks 3 to '+(weeks-2), h:'The remaining '+fmt(sup-wave)+' suppliers',
+        pl:'support', p:'Steps in when a supplier stalls or a question needs a person.',
+        tl:'lead', t:'Sends invites in waves, with automated reminders until each record is confirmed.',
+        y:'Watch progress. No chasing.'});
+    rows.push({w:'Weeks '+(weeks-1)+' to '+weeks, h:'Close out', key:true,
+        pl:'support', p:'Reviews what the technology flags before you sign off.',
+        tl:'lead', t:'Consolidates one record per product, ready for the Phantm platform or your own system.',
+        y:'Approve the record.'});
+    rows.push({w:'After close-out', h:'Kept current', next:true,
+        pl:'standby', p:'On call when you need a person.',
+        tl:'lead', t:"This year's confirmed data becomes next year's pre-load, so suppliers review only what changed.",
+        y:'Reuse the record wherever your team works.'});
+    return rows;
+  }
+
+  function renderRollout(sup, method, weeks, wave){
+    const rows = phases(sup, method, weeks, wave);
+    const hand = rows.findIndex(r=>r.tl==='lead');           // first phase the technology leads
+    const last = rows.length-2;                              // close out, the last dated phase
+    const head = '<div aria-hidden="true"></div>'
+      + '<div class="lane-head p"><i></i>First Mile team</div>'
+      + '<div class="lane-head t"><i></i>Technology</div>'
+      + '<div class="lane-head y"><i></i>Your team</div>';
+    const handover = '<div class="handover"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" aria-hidden="true"><path d="M12 4v14m0 0-5-5m5 5 5-5"/></svg>From here, the technology takes over the chase</div>';
+    $('phases').innerHTML = head + rows.map((r,i)=>{
+      const cls = ['phase'];
+      if(r.key) cls.push('key');
+      if(r.next) cls.push('next','rt','rb');
+      if(i===0) cls.push('first','rt');
+      if(i===hand-1 || i===last) cls.push('rb');
+      if(i===hand) cls.push('rt');
+      return (i===hand ? handover : '')
+        + `<div class="${cls.join(' ')}">`
+        + `<div class="ph-head"><div class="when">${r.w}</div><h4>${r.h}</h4></div>`
+        + `<div class="cell p-${r.pl}"><span class="who">First Mile team</span>${r.p}</div>`
+        + `<div class="cell t-${r.tl}"><span class="who">Technology</span>${r.t}</div>`
+        + `<div class="cell you"><span class="who">Your team</span>${r.y}</div>`
+        + '</div>';
+    }).join('');
+    $('rollMeta').textContent = `Sized for ${fmt(sup)} suppliers over ${weeks} weeks.`;
+  }
+
+  function render(){
+    const sup = +document.querySelector('input[name=sup]:checked').value;
+    const method = document.querySelector('input[name=method]:checked').value;
+    const types = document.querySelectorAll('#needs input:checked').length;
+    const chase = sup*(method==='portal'?3:4);
+    const today = sup*(2.5 + 0.75*types*(method==='portal'?0.5:1));
+    const saved = Math.max(0, today - sup*(40/60));
+    const weeks = weeksFor(sup), wave = Math.min(10, sup);
+
+    $('sWeeks').textContent = weeks;
+    $('sChase').textContent = fmt(chase);
+    $('sHours').textContent = types ? fmt(saved) : '0';
+
+    const needs = [...document.querySelectorAll('#needs input:checked')].map(i=>i.value);
+    renderFlags(sup, needs, method);
+    renderRollout(sup, method, weeks, wave);
+    window.__phantmAnswers = {suppliers:sup, method, types, weeks};
+  }
+  document.querySelectorAll('#plan input').forEach(i=>i.addEventListener('change',render));
+  render();
+
+  $('send').addEventListener('click', ()=>{
+    const email = $('email').value.trim(), company = $('company').value.trim();
+    if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)){ $('err').textContent='Enter a work email so we can send your plan.'; $('email').focus(); return; }
+    if(!company){ $('err').textContent='Enter your company name.'; $('company').focus(); return; }
+    $('err').textContent='';
+    // MVP: post email, company, consent and window.__phantmAnswers to the CRM here.
+    $('send').hidden = true;
+    $('thanks').hidden = false;
+  });
+})();
+</script>
+</body>
+</html>
